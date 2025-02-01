@@ -1,32 +1,17 @@
-import FAQ from "../models/faq.ts";
-import { Redis } from "ioredis";
-import { LANGUAGES } from "../utils/languages.ts";
-import { Translate } from "../utils/translater.ts";
-import { ObjectId } from "mongodb";
+const FAQ = require("../models/faq.js");
+const { Redis } = require("ioredis");
+const { LANGUAGES } = require("../utils/languages.js");
+const { Translate } = require("../utils/translater.js");
+const { ObjectId } = require("mongodb");
 
 const redis = new Redis();
 
-type createreqbody = {
-  question: string;
-  answer: string;
-  translated_questions: {};
-  translated_answers: {};
-};
-
-type updatereqbody = {
-  question?: string;
-  answer?: string;
-};
-
-export const create = async (req, res): Promise<void> => {
+const create = async (req, res) => {
   try {
-    const { question, answer } = req.body as createreqbody;
+    const { question, answer } = req.body;
     const faq = new FAQ({ question, answer });
 
-    const { translated_answers, translated_questions } = await Translate(
-      question,
-      answer
-    );
+    const { translated_answers, translated_questions } = await Translate(question, answer);
 
     faq["translated_questions"] = translated_questions;
     faq["translated_answers"] = translated_answers;
@@ -37,15 +22,14 @@ export const create = async (req, res): Promise<void> => {
   }
 };
 
-export const get = async (req, res): Promise<void> => {
+const get = async (req, res) => {
   try {
-    let lang = (req.query.lang as string) || "en";
+    let lang = req.query.lang || "en";
     if (!LANGUAGES.includes(lang)) {
       lang = "en";
     }
-    const page = Math.max(Math.abs(Number(req.query.p as string)), 1) || 1;
-    const pagelimit =
-      Math.max(Math.abs(Number(req.query.len as string)), 1) || 10;
+    const page = Math.max(Math.abs(Number(req.query.p)), 1) || 1;
+    const pagelimit = Math.max(Math.abs(Number(req.query.len)), 1) || 10;
 
     const cachedFAQs = await redis.get(`faqs:${lang},p:${page},l:${pagelimit}`);
     if (cachedFAQs) return res.json(JSON.parse(cachedFAQs));
@@ -83,57 +67,63 @@ export const get = async (req, res): Promise<void> => {
   }
 };
 
-export const update = async (req, res): Promise<void> => {
+const update = async (req, res) => {
   try {
-    const {id} = req.params;
-    const { question, answer } = req.body as updatereqbody;
+    const { id } = req.params;
+    const { question, answer } = req.body;
 
-    if(!question && !answer) {
-        res.status(400).json({ error: "To update faq either question or answer is required" });
-        return;
+    if (!question && !answer) {
+      res.status(400).json({ error: "To update faq either question or answer is required" });
+      return;
     }
 
-    
-    const {translated_answers, translated_questions} = await Translate(question, answer);
-    
+    const { translated_answers, translated_questions } = await Translate(question, answer);
+
     const update = {};
-    
-    question && (update["question"] = question);
-    answer && (update["answer"] = answer);
-    translated_answers && (update["translated_answers"] = translated_answers);
-    translated_questions && (update["translated_questions"] = translated_questions);
-    
+
+    if (question) update["question"] = question;
+    if (answer) update["answer"] = answer;
+    if (translated_answers) update["translated_answers"] = translated_answers;
+    if (translated_questions) update["translated_questions"] = translated_questions;
+
     const objectId = new ObjectId(id);
-    const updatedFAQ = await FAQ.findByIdAndUpdate(objectId, {...update});
+    const updatedFAQ = await FAQ.findByIdAndUpdate(objectId, { ...update });
 
     if (!updatedFAQ) {
       return res.status(404).json({ error: "FAQ not found" });
     }
 
-    res.status(200).json({msg:"successfully updated."});
+    res.status(200).json({ msg: "successfully updated." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const deleteone = async (req, res): Promise<void> => {
+const deleteone = async (req, res) => {
   try {
-    const {id} = req.param;
+    const { id } = req.param;
     await FAQ.findOneAndDelete(id);
 
-    res.status(204).json({msg:"Deletion was successful."});
+    res.status(204).json({ msg: "Deletion was successful." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const deleteall = async (req, res): Promise<void> => {
+const deleteall = async (req, res) => {
   try {
-    
     await FAQ.deleteMany({});
 
-    res.status(204).json({ message: `All Deleted successfully.` });
+    res.status(204).json({ message: "All Deleted successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+};
+
+module.exports = {
+  create,
+  get,
+  update,
+  deleteone,
+  deleteall
 };

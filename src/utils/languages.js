@@ -1,5 +1,5 @@
-export const LANGUAGES = [
+exports.LANGUAGES = [
     "hi",
     "bn",
     "gh"
-]
+];

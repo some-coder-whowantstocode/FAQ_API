@@ -1,16 +1,16 @@
-import request from 'supertest';
-import app from '../src/index.ts';
-import FAQ from '../src/models/faq.ts';
-import { Redis } from 'ioredis';
-import sinon from 'sinon';
-import { expect } from 'chai';
-import mongoose from 'mongoose';
+const request = require('supertest');
+const app = require('../src/index.js');
+const FAQ = require('../src/models/faq.js');
+const { Redis } = require('ioredis');
+const sinon = require('sinon');
+const { expect } = require('chai');
+const mongoose = require('mongoose');
 
 sinon.mock('../src/models/faq');
 sinon.mock('ioredis');
 
 describe('FAQ API', () => {
-  let redisClient: sinon.SinonMock;
+  let redisClient;
 
   beforeEach(() => {
     redisClient = sinon.mock(new Redis());

@@ -1,19 +1,15 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url'; 
-import { connectDB } from './config/db.ts';
-import faqRouter from './routes/router.ts';
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const path = require('path');
+const { connectDB } = require('./config/db.js');
+const faqRouter = require('./routes/router.js');
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 9310;
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,4 +29,4 @@ app.use('/api', faqRouter);
   }
 })();
 
-export default app;
+module.exports = app;
