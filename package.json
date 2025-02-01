@@ -1,5 +1,5 @@
 {
-  "name": "6",
+  "name": "faq-management-system",
   "version": "1.0.0",
   "main": "src/index.ts",
   "type": "module",
@@ -37,6 +37,7 @@
     "nodemon": "^3.1.9",
     "sinon": "^19.0.2",
     "supertest": "^7.0.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "ts-node": "^10.9.1"  
   }
 }
