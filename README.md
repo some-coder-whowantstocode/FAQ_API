@@ -28,7 +28,7 @@ This project is a FAQ Management System that allows users to create, read, updat
 
     ```env
     PORT=9310
-    MONGODB_URI="mongodb://localhost:27017/translate"
+    MONGO_URI="mongodb://localhost:27017/translate"
     ```
 
 ## Running the Server
