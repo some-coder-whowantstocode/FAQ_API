@@ -18,7 +18,7 @@ This project is a FAQ Management System that allows users to create, read, updat
 1.  **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/your-username/your-repo-name.git](https://www.google.com/search?q=https://github.com/your-username/your-repo-name.git)
+    git clone https://github.com/some-coder-whowantstocode/FAQ_API.git
     cd your-repo-name
     ```
 
