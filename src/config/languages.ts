@@ -1,4 +1,5 @@
 export const LANGUAGES = [
     "hi",
-    "bn"
+    "bn",
+    "gh"
 ]

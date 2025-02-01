@@ -7,32 +7,54 @@ const redis = new Redis();
 
 type createreqbody = {
     question:string,
-    answer:string
+    answer:string,
+    translated_questions:{},
+    translated_answers:{}
 }
 
-export const createFAQ = async (req, res): Promise<void> => {
+export const create = async (req, res): Promise<void> => {
     try {
         const { question, answer } = req.body as createreqbody;
         const faq = new FAQ({ question, answer });
-        const Promises = LANGUAGES.map((val)=>{
+        const translated_questions = {};
+        const translated_answers = {};
+        const questionPromises = LANGUAGES.map((val)=>{
             return new Promise((resolve, reject)=>{
                 translatte(question,{to:val})
                 .then((res)=>{
-                    console.log(res.text)
-                    faq[`question_${val}`] = res.text;
-                    console.log(faq)
+                    translated_questions[val]=res.text;
                     resolve("resolved");
                 })
                 .catch((err)=>{
-                    reject(`Error while translating to ${val} : ${err}`);
+                    console.warn(`Error while translating question to ${val} : ${err}`)
+                    resolve("resolved");
                 })
             })
         })
+
+        const answerPromises = LANGUAGES.map((val)=>{
+            return new Promise((resolve, reject)=>{
+                translatte(answer,{to:val})
+                .then((res)=>{
+                    translated_answers[val]=res.text;
+                    resolve("resolved");
+                })
+                .catch((err)=>{
+                    console.warn(`Error while translating answer to ${val} : ${err}`)
+                    resolve("resolved");
+                })
+            })
+        })
+
+        const Promises = [...answerPromises,...questionPromises];
+
         Promise.all(Promises)
         .catch((err)=>{
-            console.warn(err);
+            console.warn("Something unexpected occured:",err);
         })
         .finally(async()=>{
+            faq["translated_questions"] = translated_questions;
+            faq["translated_answers"] = translated_answers;
             await faq.save();
             res.status(201).json(faq);
         })
@@ -43,7 +65,7 @@ export const createFAQ = async (req, res): Promise<void> => {
     }
 };
 
-export const getFAQs = async (req, res): Promise<void> => {
+export const get = async (req, res): Promise<void> => {
     try {
         let lang = req.query.lang as string || 'en';
         if(!LANGUAGES.includes(lang)){
@@ -56,7 +78,6 @@ export const getFAQs = async (req, res): Promise<void> => {
         if (cachedFAQs) return res.json(JSON.parse(cachedFAQs));
 
         
-        const questiontype = `question_${lang}`;
         const faqs = await FAQ.aggregate([
             {$facet:{
                 "data":[
@@ -64,7 +85,8 @@ export const getFAQs = async (req, res): Promise<void> => {
                     {$skip:(page-1) * pagelimit},
                     {$limit:pagelimit},
                     {$addFields:{
-                        question:`$${questiontype}`
+                        question:`$translated_questions[${lang}]`,
+                        answer:`$translated_answers[${lang}]`
                     }},
                     {$project:{question:1,answer:1, _id:1}}
                 ],
