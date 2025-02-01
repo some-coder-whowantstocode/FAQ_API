@@ -59,8 +59,8 @@ export const get = async (req, res): Promise<void> => {
             { $limit: pagelimit },
             {
               $addFields: {
-                question: `$translated_questions[${lang}]`,
-                answer: `$translated_answers[${lang}]`,
+                question: { $ifNull: [`$translated_questions.${lang}`, '$question'] },
+                answer: { $ifNull: [`$translated_answers.${lang}`, '$answer'] },
               },
             },
             { $project: { question: 1, answer: 1, _id: 1 } },
@@ -83,7 +83,7 @@ export const get = async (req, res): Promise<void> => {
 
 export const update = async (req, res): Promise<void> => {
   try {
-    const {id} = req.query;
+    const {id} = req.param;
     const { question, answer } = req.body as updatereqbody;
 
     if(!question && !answer) {
@@ -108,6 +108,28 @@ export const update = async (req, res): Promise<void> => {
     }
 
     res.status(200).json({msg:"successfully updated."});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteone = async (req, res): Promise<void> => {
+  try {
+    const {id} = req.param;
+    await FAQ.findOneAndDelete(id);
+
+    res.status(204).json({msg:"Deletion was successful."});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteall = async (req, res): Promise<void> => {
+  try {
+    
+    await FAQ.deleteMany({});
+
+    res.status(204).json({ message: `All Deleted successfully.` });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
