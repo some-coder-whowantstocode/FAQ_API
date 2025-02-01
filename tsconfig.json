@@ -8,6 +8,6 @@
       "allowImportingTsExtensions": true,
       "noEmit": true
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "server/test", "test"]
   }
   

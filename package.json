@@ -4,9 +4,12 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha 'test/**/*.ts' --timeout 10000",
     "start": "nodemon src/index.ts",
     "build": "tsc"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@types/mongoose": "^5.11.96",
@@ -28,7 +31,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "chai": "^5.1.2",
+    "mocha": "^11.1.0",
     "nodemon": "^3.1.9",
+    "sinon": "^19.0.2",
+    "supertest": "^7.0.0",
     "typescript": "^5.7.3"
   }
 }

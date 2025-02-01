@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs</title>
+    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>FAQs</h1>
+        <div class="controls">
+            <input type="number" id="page-size" name="page-size" value="10" min="1" title="Set Page Size">
+            <button id="reload-btn" title="Reload FAQs"><i class="fas fa-sync-alt"></i></button>
+            <button id="delete-all-btn" class="danger">Delete All FAQs</button>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h2>Create FAQ</h2>
+            <form id="create-faq-form">
+                <label for="create-question">Question:</label>
+                <input type="text" id="create-question" name="create-question" required>
+                <label for="create-answer">Answer:</label>
+                <input type="text" id="create-answer" name="create-answer" required>
+                <button type="submit">Add FAQ</button>
+            </form>
+        </section>
+        <section>
+            <h2>Update FAQ</h2>
+            <form id="update-faq-form" class="hidden">
+                <input type="hidden" id="update-id" name="update-id">
+                <label for="update-question">New Question:</label>
+                <input type="text" id="update-question" name="update-question">
+                <label for="update-answer">New Answer:</label>
+                <input type="text" id="update-answer" name="update-answer">
+                <button type="submit">Update FAQ</button>
+            </form>
+        </section>
+        <div id="faq-list"></div>
+        <div class="pagination-controls">
+            <button id="prev-page-btn">Previous</button>
+            <span id="page-info"></span>
+            <button id="next-page-btn">Next</button>
+        </div>
+    </main>
+    <script src="/index.js"></script>
+</body>
+</html>

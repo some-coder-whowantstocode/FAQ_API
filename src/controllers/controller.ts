@@ -1,6 +1,6 @@
 import FAQ from "../models/faq.ts";
 import { Redis } from "ioredis";
-import { LANGUAGES } from "../config/languages.ts";
+import { LANGUAGES } from "../utils/languages.ts";
 import { Translate } from "../utils/translater.ts";
 import { ObjectId } from "mongodb";
 
@@ -59,8 +59,8 @@ export const get = async (req, res): Promise<void> => {
             { $limit: pagelimit },
             {
               $addFields: {
-                question: { $ifNull: [`$translated_questions.${lang}`, '$question'] },
-                answer: { $ifNull: [`$translated_answers.${lang}`, '$answer'] },
+                question: { $cond: { if: { $eq: [lang, 'en'] }, then: '$question', else: { $ifNull: [`$translated_questions.${lang}`, '$question'] } } },
+                answer: { $cond: { if: { $eq: [lang, 'en'] }, then: '$answer', else: { $ifNull: [`$translated_answers.${lang}`, '$answer'] } } },
               },
             },
             { $project: { question: 1, answer: 1, _id: 1 } },
@@ -73,7 +73,9 @@ export const get = async (req, res): Promise<void> => {
     const faq = faqs[0];
     await redis.set(
       `faqs:${lang},p:${page},l:${pagelimit}`,
-      JSON.stringify(faq)
+      JSON.stringify(faq),
+      'EX',
+      6
     );
     res.json(faq);
   } catch (error) {
@@ -83,7 +85,7 @@ export const get = async (req, res): Promise<void> => {
 
 export const update = async (req, res): Promise<void> => {
   try {
-    const {id} = req.param;
+    const {id} = req.params;
     const { question, answer } = req.body as updatereqbody;
 
     if(!question && !answer) {
@@ -91,10 +93,11 @@ export const update = async (req, res): Promise<void> => {
         return;
     }
 
+    
     const {translated_answers, translated_questions} = await Translate(question, answer);
-
+    
     const update = {};
-
+    
     question && (update["question"] = question);
     answer && (update["answer"] = answer);
     translated_answers && (update["translated_answers"] = translated_answers);

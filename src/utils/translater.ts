@@ -1,5 +1,5 @@
 import translatte from "translatte";
-import { LANGUAGES } from "../config/languages.ts";
+import { LANGUAGES } from "./languages.ts";
 
 interface obj {
   [key: string]: string;
