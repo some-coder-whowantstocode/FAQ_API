@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const { connectDB } = require('./config/db.js');
 const faqRouter = require('./routes/router.js');
+const redis = require('./config/redisClient.js');
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use('/api', faqRouter);
 
 (async () => {
   const success = await connectDB();
+  
   if (success) {
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);

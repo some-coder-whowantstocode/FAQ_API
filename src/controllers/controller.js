@@ -1,10 +1,9 @@
 const FAQ = require("../models/faq.js");
-const { Redis } = require("ioredis");
+const redis = require('../config/redisClient.js');
 const { LANGUAGES } = require("../utils/languages.js");
 const { Translate } = require("../utils/translater.js");
 const { ObjectId } = require("mongodb");
 
-const redis = new Redis();
 
 const create = async (req, res) => {
   try {
