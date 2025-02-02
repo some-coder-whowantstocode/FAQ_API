@@ -33,6 +33,8 @@ This project is a FAQ Management System that allows users to create, read, updat
 - Fail-safe in case of failure, ensuring that other translations still occur without throwing an error.
 - Pagination for easy navigation.
 - Efficient data retrieval using MongoDB's aggregation pipeline.
+- Server-Side Rendering (SSR) for improved performance and SEO.
+- Docker containerization for consistent deployment and scalability.
 - Caching with Redis for improved performance.
 - Comprehensive unit tests for API endpoints.
 
