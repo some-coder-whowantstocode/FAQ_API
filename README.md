@@ -218,11 +218,11 @@ The admin panel provides the following functionalities for managing FAQs:
 
 ## Client Page 
 
-![client page](https://github.com/some-coder-whowantstocode/FAQ_API/main/assets/clientPage.png)
+![client page](https://raw.githubusercontent.com/some-coder-whowantstocode/FAQ_API/main/assets/clientPage.png)
 
 ## Update Faq
 
-![update faq](https://github.com/some-coder-whowantstocode/FAQ_API/main/assets/updateFaq.png)
+![update faq](https://raw.githubusercontent.com/some-coder-whowantstocode/FAQ_API/main/assets/updateFaq.png)
 
 # License
 
