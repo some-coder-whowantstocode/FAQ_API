@@ -37,6 +37,7 @@ This project is a FAQ Management System that allows users to create, read, updat
 - Docker containerization for consistent deployment and scalability.
 - Caching with Redis for improved performance.
 - Comprehensive unit tests for API endpoints.
+- centralized Error handler.
 
 # Installation
 
