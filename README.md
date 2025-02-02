@@ -30,8 +30,9 @@ This project is a FAQ Management System that allows users to create, read, updat
 ## Features
 - Create, read, update, and delete FAQs.
 - Multi-language support for FAQs.
-- WYSIWYG editor for formatting answers.
+- Fail-safe in case of failure, ensuring that other translations still occur without throwing an error.
 - Pagination for easy navigation.
+- Efficient data retrieval using MongoDB's aggregation pipeline.
 - Caching with Redis for improved performance.
 - Comprehensive unit tests for API endpoints.
 
@@ -52,7 +53,9 @@ This project is a FAQ Management System that allows users to create, read, updat
 
     ```env
     PORT=9310
-    MONGO_URI="mongodb://localhost:27017/translate"
+    MONGO_URI=mongodb://localhost:27017/translate
+    REDIS_HOST=redis
+    REDIS_PORT=6379
     ```
 
 ## Running the Server
