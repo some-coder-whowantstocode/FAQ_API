@@ -6,6 +6,7 @@ const path = require('path');
 const { connectDB } = require('./config/db.js');
 const faqRouter = require('./routes/router.js');
 const redis = require('./config/redisClient.js');
+const errorHandler = require('./middleware/errorHandler.js');
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', faqRouter);
+app.use(errorHandler);
 
 (async () => {
   const success = await connectDB();

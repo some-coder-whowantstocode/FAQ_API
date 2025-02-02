@@ -5,7 +5,7 @@ const { Translate } = require("../utils/translater.js");
 const { ObjectId } = require("mongodb");
 
 
-const create = async (req, res) => {
+const create = async (req, res, next) => {
   try {
     const { question, answer } = req.body;
     const faq = new FAQ({ question, answer });
@@ -17,11 +17,11 @@ const create = async (req, res) => {
     await faq.save();
     res.status(201).json(faq);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 };
 
-const get = async (req, res) => {
+const get = async (req, res, next) => {
   try {
     let lang = req.query.lang || "en";
     if (!LANGUAGES.includes(lang)) {
@@ -62,11 +62,11 @@ const get = async (req, res) => {
     );
     res.json(faq);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 };
 
-const update = async (req, res) => {
+const update = async (req, res,next) => {
   try {
     const { id } = req.params;
     const { question, answer } = req.body;
@@ -94,28 +94,28 @@ const update = async (req, res) => {
 
     res.status(200).json({ msg: "successfully updated." });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 };
 
-const deleteone = async (req, res) => {
+const deleteone = async (req, res, next) => {
   try {
     const { id } = req.param;
     await FAQ.findOneAndDelete(id);
 
     res.status(204).json({ msg: "Deletion was successful." });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 };
 
-const deleteall = async (req, res) => {
+const deleteall = async (req, res, next) => {
   try {
     await FAQ.deleteMany({});
 
     res.status(204).json({ message: "All Deleted successfully." });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error);
   }
 };
 
