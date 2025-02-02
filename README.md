@@ -1,7 +1,31 @@
 # FAQ Management System
 
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+  - [Steps](#steps)
+  - [Running the Server](#running-the-server)
+    - [Option 1: Running without Docker](#option-1-running-without-docker)
+    - [Option 2: Running with Docker](#option-2-running-with-docker)
+- [Running the Tests](#running-the-tests)
+- [API Endpoints](#api-endpoints)
+  - [Fetch FAQs](#fetch-faqs)
+  - [Create FAQ](#create-faq)
+  - [Update FAQ](#update-faq)
+  - [Delete One FAQ](#delete-one-faq)
+  - [Delete All FAQs](#delete-all-faqs)
+- [Admin Panel](#admin-panel)
+  - [Access the Admin Panel](#access-the-admin-panel)
+  - [FAQ Management](#faq-management)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Client Page](#client-page)
+- [Update FAQ](#update-faq-image)
+- [License](#license)
+
 ## Overview
 This project is a FAQ Management System that allows users to create, read, update, and delete FAQs. It supports multi-language translations, caching for improved performance, and pagination for easy navigation through FAQs.
+
 
 ## Features
 - Create, read, update, and delete FAQs.
