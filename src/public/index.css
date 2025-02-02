@@ -79,6 +79,7 @@ body {
   
   .faq-question {
     font-weight: bold;
+    color:white !important;
   }
   
   .faq-answer {

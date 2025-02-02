@@ -216,6 +216,15 @@ The admin panel provides the following functionalities for managing FAQs:
 
 4.  **Open a Pull Request:** Open a pull request and describe your changes.
 
+## Client Page 
+
+![client page](https://github.com/some-coder-whowantstocode/FAQ_API/assets/clientPage.png)
+
+## Update Faq
+
+![update faq](https://github.com/some-coder-whowantstocode/FAQ_API/assets/updateFaq.png)
+
+
 # License
 
 This project is licensed under the MIT License.
