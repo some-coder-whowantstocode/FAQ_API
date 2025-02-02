@@ -132,6 +132,23 @@ npm test
     ```bash 
     curl -X GET "http://localhost:9310/api/get?p=1&len=10&lang=en"
     ```
+* **Example Response** 
+    ```bash 
+    {
+        "data": [
+            {
+              "_id": "609c1c1f2e4e6f06b84a1c1e",
+              "question": "Sample Question",
+              "answer": "Sample Answer"
+            }
+        ],
+        "total": [
+            {
+                "count": 1
+            }
+        ]
+    }
+    ```
 
 ### Create FAQ
 
@@ -150,6 +167,24 @@ npm test
     curl -X POST "http://localhost:9310/api/create" -H "Content-Type: application/json" -d '{"question": "Sample Question", "answer": "Sample Answer"}'
 
 ```
+* **Example Response** 
+    ```bash 
+    {
+        "_id": "609c1c1f2e4e6f06b84a1c1e",
+        "question": "Sample Question",
+        "answer": "Sample Answer",
+        "translated_questions": {
+          "hi": "नमूना प्रश्न",
+          "bn": "নমুনা প্রশ্ন"
+        },
+        "translated_answers": {
+          "hi": "नमूना उत्तर",
+          "bn": "নমুনা উত্তর"
+        },
+        "__v": 0
+    }
+
+    ```
 
 ### Update FAQ
 
@@ -169,6 +204,13 @@ npm test
 
 ```
 
+* **Example Response** 
+    ```bash 
+    {
+        "msg": "successfully updated."
+    }
+    ```
+
 ### Delete One FAQ
 
 *   **Endpoint:** `/api/deleteone/:id`
@@ -180,6 +222,13 @@ npm test
 
 ```
 
+* **Example Response** 
+    ```bash 
+    {
+        "msg": "Deletion was successful."
+    }
+    ```
+
 ### Delete All FAQs
 
 *   **Endpoint:** `/api/deleteall`
@@ -189,6 +238,14 @@ npm test
  ```bash 
     curl -X DELETE "http://localhost:9310/api/deleteall"
 ```
+
+* **Example Response** 
+    ```bash 
+    {
+       "msg": "All Deleted successfully."
+    }
+    ```
+
 
 # Admin Panel
 

@@ -113,7 +113,7 @@ const deleteall = async (req, res, next) => {
   try {
     await FAQ.deleteMany({});
 
-    res.status(204).json({ message: "All Deleted successfully." });
+    res.status(204).json({ msg: "All Deleted successfully." });
   } catch (error) {
     next(error);
   }
