@@ -203,25 +203,31 @@ Visit `http://localhost:9310/`.
 The admin panel provides the following functionalities for managing FAQs:
 
 *   **Add an FAQ:**
-    1.  Click on **FAQs** → **Add FAQ**.
-    2.  Fill in the **Question (English)** and **Answer (English)** fields.
+    1.  Fill in the **Question (English)** and **Answer (English)** fields.
+    2.  Click on **Add FAQ**.
     3.  The Hindi and Bengali translations will be automatically generated when you save the FAQ.
 
+*   **Get all FAQ:**
+    1.  click on the **Reload Button** on the top right of the page to left of the **Delete all**.
+    2.  It will bring FAQS based on page size.
+
 *   **Edit an FAQ:**
-    1.  Click on an existing FAQ to edit it.
-    2.  You can manually update the translations if needed.
+    1.  Click on **edit icon** of an existing FAQ to edit it.
+    2.  An **Update FAQ** will popup right below **Add FAQ** fill question and answer then click on **update FAQ**.
 
-*   **Remove an FAQ:**  (Specific instructions on how to remove an FAQ should be added here.  For example: "Select the FAQ and click the 'Delete' button.")
+*   **Remove an FAQ:**
+    1.  Click on **Delete icon** of an existing FAQ to delete it.
+    2.  It will automatically delete it after sometime due to creating it in limited time a responsive loading is not added so wait for sometime or simply reload the page.
 
-*   **Remove All FAQs:** (Specific instructions on how to remove all FAQs should be added here. For example: "Click the 'Delete All' button.")
+*   **Remove All FAQs:**
+    1. Click the **Delete All** button at the top right corner right beside **Reload button**.
 
-*   **Access with Pagination:** FAQs are displayed with pagination, allowing you to easily navigate through a large number of FAQs.
+*   **Access with Pagination:**
+    1. A input box is on the top of page with **default value** of **10** you can adjust it for pagination and then hit **Reload button**.
+    2. At the bottom of the FAQs, you will see two buttons, **prev** and **next**. The size will be dynamically generated from each retrieval of users to avoid using too many resources and ensure accuracy..
 
-*   **Change Language:** The admin panel supports changing the displayed language. (Specific instructions on how to change the language should be added here. For example: "Select the desired language from the dropdown menu.")
-
-*   **Update:** (This likely refers to the "Edit an FAQ" functionality described above.  Consider using consistent terminology.)
-
-*   **Delete:** (This likely refers to the "Remove an FAQ" functionality described above. Consider using consistent terminology.)
+*   **Change Language:**
+    1. On the top there is a drop box with options for hindi english and bn.
 
 ## Client Page 
 
