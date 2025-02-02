@@ -18,8 +18,8 @@
 - [Admin Panel](#admin-panel)
   - [Access the Admin Panel](#access-the-admin-panel)
   - [FAQ Management](#faq-management)
-- [Contribution Guidelines](#contribution-guidelines)
 - [Client Page](#client-page)
+- [Contribution Guidelines](#contribution-guidelines)
 - [Update FAQ](#update-faq-image)
 - [License](#license)
 
@@ -218,6 +218,14 @@ The admin panel provides the following functionalities for managing FAQs:
 
 *   **Delete:** (This likely refers to the "Remove an FAQ" functionality described above. Consider using consistent terminology.)
 
+## Client Page 
+
+![client page](https://raw.githubusercontent.com/some-coder-whowantstocode/FAQ_API/main/assets/clientPage.png)
+
+## Update Faq
+
+![update faq](https://raw.githubusercontent.com/some-coder-whowantstocode/FAQ_API/main/assets/updateFaq.png)
+
 # Contribution Guidelines
 
 1.  **Fork the Repository:**
@@ -240,13 +248,6 @@ The admin panel provides the following functionalities for managing FAQs:
 
 4.  **Open a Pull Request:** Open a pull request and describe your changes.
 
-## Client Page 
-
-![client page](https://raw.githubusercontent.com/some-coder-whowantstocode/FAQ_API/main/assets/clientPage.png)
-
-## Update Faq
-
-![update faq](https://raw.githubusercontent.com/some-coder-whowantstocode/FAQ_API/main/assets/updateFaq.png)
 
 # License
 
